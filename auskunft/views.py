@@ -2,7 +2,7 @@ import datetime
 from io import BytesIO
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext as _
 
 from dinbrief.document import Document
@@ -44,6 +44,8 @@ def create(request):
         # create pdf
         response = create_pdf_response(document)
         return response
+    else:
+        raise Http404
 
 def create_content(form):
     content = [
