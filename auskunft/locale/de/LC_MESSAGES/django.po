@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-26 15:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: views.py:49
+msgid "auskunft_subject"
+msgstr "Auskunftsbegehren gemäß §§ 26 DSG 2000"
+
+#: views.py:50
+msgid "auskunft_greeting"
+msgstr "Sehr geehrte Damen und Herren!"
+
+#: views.py:52
+msgid "auskunft_question_text"
+msgstr "Sie führen personenbezogene Datenverarbeitung(en) und Datenanwendungen. Ich ersuche Sie unter Hinweis auf §§ 1, 23, 26, 50 DSG 2000 sowie alle weiteren anwendbaren datenschutzrechtlichen Bestimmungen um Beantwortung der folgenden Fragen:"
+
+#: views.py:54
+msgid "auskunft_question_1"
+msgstr "Welcher Art sind die Daten, die Sie über mich speichern?"
+
+#: views.py:55
+msgid "auskunft_question_2"
+msgstr "Welchen Inhalt haben diese Daten, woher stammen sie, wozu werden sie verwenden, an wen wurden sie übermittelt?"
+
+#: views.py:56
+msgid "auskunft_question_3"
+msgstr "Zu welchem Zweck werden die Datenanwendungen betrieben?"
+
+#: views.py:57
+msgid "auskunft_question_4"
+msgstr "Aufgrund welcher Vertrags- bzw. Rechtsgrundlage werden die Daten verwendet?"
+
+#: views.py:61
+msgid "auskunft_additional_info_text"
+msgstr "Im Sinne einer weitestgehenden Mitwirkung, gemäß § 26 (3) DSG, gebe ich Ihnen zusätzlich folgende Informationen bekannt:"
+
+#: views.py:64
+msgid "auskunft_expected_response"
+msgstr "Gemäß § 26 DSG 2000 hat die Auskunft binnen acht Wochen schriftlich, kostenlos und in allgemein verständlicher Form zu erfolgen."
+
+#: views.py:66
+msgid "auskunft_signature"
+msgstr "Mit freundlichen Grüßen,"
