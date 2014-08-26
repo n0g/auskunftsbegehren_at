@@ -10,6 +10,8 @@ from dinbrief.template import BriefTemplate
 from dinbrief.styles import styles
 from reportlab.platypus import Spacer, Paragraph, ListFlowable, ListItem
 from reportlab.lib.units import cm,mm
+from reportlab.lib import colors
+from reportlab.lib.styles import ParagraphStyle
 
 from auskunft.forms import AuskunftForm
 
@@ -48,22 +50,46 @@ def create(request):
         raise Http404
 
 def create_content(form):
+    # style for input box
+    ibs = ParagraphStyle('inputBoxStyle',styles['Message'])
+    ibs.fontName = 'Courier'
+    ibs.leftIndent = cm
+    ibs.spaceBefore = 0.2*cm
+    ibs.spaceAfter = 0.5*cm
+#     ibs.borderWidth = 0.5
+#     ibs.borderColor = colors.black
+#     ibs.backColor = colors.HexColor('#CCCCCC')
+#     ibs.borderPadding = 5
+
+    styles['Subject'].fontName = 'Helvetica-Bold'
+
     content = [
         Paragraph(_("auskunft_subject"), styles['Subject']),
         Paragraph(_("auskunft_greeting"), styles['Greeting']),
         Spacer(0,0.5*cm),
 
         Paragraph(_("auskunft_question_text"), styles['Message']),
-#         ListFlowable([
-#             ListItem(Paragraph(_("auskunft_question_1"),styles['Text'])),
-#             ListItem(Paragraph(_("auskunft_question_2"),styles['Text'])),
-#             ListItem(Paragraph(_("auskunft_question_3"),styles['Text'])),
-#             ListItem(Paragraph(_("auskunft_question_4"),styles['Text'])),
-#             ])
+        ListFlowable([
+            ListItem(Paragraph(_("auskunft_question_1"),styles['Message'])),
+            ListItem(Paragraph(_("auskunft_question_2"),styles['Message'])),
+            ListItem(Paragraph(_("auskunft_question_3"),styles['Message'])),
+            ListItem(Paragraph(_("auskunft_question_4"),styles['Message'])),
+            ],
+            bulletType='bullet',
+            start='square'
+        ),
+
+        Paragraph(_("auskunft_reference"), styles['Message']),
+        Paragraph(_("auskunft_standard_application"), styles['Message']),
+        Paragraph(_("auskunft_par_10"), styles['Message']),
+        Paragraph(_("auskunft_par_4"), styles['Message']),
+        Paragraph(_("auskunft_par_12"), styles['Message']),
+
 
         Paragraph(_("auskunft_additional_info_text"), styles['Message']),
-        Paragraph(form.cleaned_data['additional_info'], styles['Message']),
+        Paragraph(form.cleaned_data['additional_info'],ibs),
 
+        Paragraph(_("auskunft_method_identity"),styles['Message']),
         Paragraph(_("auskunft_expected_response"),styles['Message']),
 
         Spacer(0,0.5*cm),
