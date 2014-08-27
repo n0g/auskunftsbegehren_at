@@ -91,13 +91,14 @@ def create_content(form):
             start='square'
         ),
         Paragraph(_("auskunft_reference"), styles['Message']),
+        Paragraph(_("auskunft_par_10"), styles['Message']),
+        Paragraph(_("auskunft_par_4"), styles['Message']),
+        Paragraph(_("auskunft_par_12"), styles['Message']),
+
         Paragraph(_("auskunft_standard_application"), styles['Message']),
         Paragraph(_("auskunft_registered_application_pre"),styles['Message']),
         table_apps,
         Paragraph(_("auskunft_registered_application_post"),styles['Message']),
-        Paragraph(_("auskunft_par_10"), styles['Message']),
-        Paragraph(_("auskunft_par_4"), styles['Message']),
-        Paragraph(_("auskunft_par_12"), styles['Message']),
 
 
         Paragraph(_("auskunft_additional_info_text"), styles['Message']),
