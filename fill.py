@@ -5,7 +5,10 @@ import datetime
 d = DVR()
 
 for ag in Auftraggeber.objects.all():
-    ag_apps = d.applications(str(ag.dvr))
+    new_dvr = "{0:07d}".format(ag.dvr)
+    ag_apps = d.applications(new_dvr)
+    if ag_apps == None:
+        continue
     for ag_app in ag_apps:
         dt = datetime.datetime.strptime(ag_app[2],'%d.%m.%Y')
         new_date = "{0}-{1}-{2}".format(dt.year,dt.month,dt.day)
