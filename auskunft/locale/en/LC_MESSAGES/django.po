@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-27 00:28+0200\n"
+"POT-Creation-Date: 2014-08-28 00:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,79 +17,89 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: views.py:65
+#: views.py:78
 msgid "auskunft_subject"
 msgstr "Information Request according to EC ..."
 
-#: views.py:66
+#: views.py:79
 msgid "auskunft_greeting"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:69
+#: views.py:81
 #, fuzzy
 msgid "auskunft_question_text"
 msgstr "Information Request according to EC ..."
 
-#: views.py:71
+#: views.py:83
 #, fuzzy
 msgid "auskunft_question_1"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:72
+#: views.py:84
 #, fuzzy
 msgid "auskunft_question_2"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:73
+#: views.py:85
 #, fuzzy
 msgid "auskunft_question_3"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:74
+#: views.py:86
 #, fuzzy
 msgid "auskunft_question_4"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:80
+#: views.py:91
 #, fuzzy
 msgid "auskunft_reference"
 msgstr "Dear Madam or Sir!"
 
-#: views.py:81
+#: views.py:92
 msgid "auskunft_standard_application"
 msgstr ""
 
-#: views.py:82
+#: views.py:93
+#, fuzzy
+msgid "auskunft_registered_application_pre"
+msgstr "Dear Madam or Sir!"
+
+#: views.py:95
+#, fuzzy
+msgid "auskunft_registered_application_post"
+msgstr "Dear Madam or Sir!"
+
+#: views.py:96
 #, fuzzy
 msgid "auskunft_par_10"
 msgstr "Information Request according to EC ..."
 
-#: views.py:83
+#: views.py:97
 #, fuzzy
 msgid "auskunft_par_4"
 msgstr "Information Request according to EC ..."
 
-#: views.py:84
+#: views.py:98
 #, fuzzy
 msgid "auskunft_par_12"
 msgstr "Information Request according to EC ..."
 
-#: views.py:87
+#: views.py:101
 #, fuzzy
 msgid "auskunft_additional_info_text"
 msgstr "Information Request according to EC ..."
 
-#: views.py:90
+#: views.py:104
 #, fuzzy
 msgid "auskunft_method_identity"
 msgstr "Information Request according to EC ..."
 
-#: views.py:91
+#: views.py:105
 #, fuzzy
 msgid "auskunft_expected_response"
 msgstr "Information Request according to EC ..."
 
-#: views.py:94
+#: views.py:108
 #, fuzzy
 msgid "auskunft_signature"
 msgstr "Information Request according to EC ..."

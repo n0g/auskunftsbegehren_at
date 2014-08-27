@@ -9,11 +9,14 @@ from dinbrief.document import Document
 from dinbrief.template import BriefTemplate
 from dinbrief.styles import styles
 from reportlab.platypus import Spacer, Paragraph, ListFlowable, ListItem
+from reportlab.platypus.tables import Table, TableStyle
 from reportlab.lib.units import cm,mm
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 
 from auskunft.forms import AuskunftForm
+
+from auskunft.models import Auftraggeber, Application
 
 
 # Create your views here.
@@ -50,24 +53,33 @@ def create(request):
         raise Http404
 
 def create_content(form):
-    # style for input box
+    # TODO: move styles somewhere else
+    # style for additional information box
     ibs = ParagraphStyle('inputBoxStyle',styles['Message'])
     ibs.fontName = 'Courier'
     ibs.leftIndent = cm
     ibs.spaceBefore = 0.2*cm
     ibs.spaceAfter = 0.5*cm
-#     ibs.borderWidth = 0.5
-#     ibs.borderColor = colors.black
-#     ibs.backColor = colors.HexColor('#CCCCCC')
-#     ibs.borderPadding = 5
-
+    # style for table of applications
+    table_style = TableStyle([
+            ('VALIGN',(0,0),(0,-1),'TOP')
+        ])
+    # font style for letter subject
     styles['Subject'].fontName = 'Helvetica-Bold'
+
+    # TODO: move application list processing in seperate function
+    # list of applications
+    apps = Application.objects.filter(auftraggeber=form.cleaned_data['auftraggeber'],state__contains="Registriert")
+    list_apps = [
+        [Paragraph(x.number,styles['Message']),
+        Paragraph(x.description,styles['Message'])] for x in apps]
+    table_apps = Table(list_apps,colWidths=[3*cm,14*cm])
+    table_apps.setStyle(table_style)
 
     content = [
         Paragraph(_("auskunft_subject"), styles['Subject']),
         Paragraph(_("auskunft_greeting"), styles['Greeting']),
         Spacer(0,0.5*cm),
-
         Paragraph(_("auskunft_question_text"), styles['Message']),
         ListFlowable([
             ListItem(Paragraph(_("auskunft_question_1"),styles['Message'])),
@@ -78,9 +90,11 @@ def create_content(form):
             bulletType='bullet',
             start='square'
         ),
-
         Paragraph(_("auskunft_reference"), styles['Message']),
         Paragraph(_("auskunft_standard_application"), styles['Message']),
+        Paragraph(_("auskunft_registered_application_pre"),styles['Message']),
+        table_apps,
+        Paragraph(_("auskunft_registered_application_post"),styles['Message']),
         Paragraph(_("auskunft_par_10"), styles['Message']),
         Paragraph(_("auskunft_par_4"), styles['Message']),
         Paragraph(_("auskunft_par_12"), styles['Message']),

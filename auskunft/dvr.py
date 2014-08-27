@@ -55,6 +55,20 @@ class DVR:
         apps = zip(app_td[0::5],app_td[1::5],app_td[2::5],app_td[3::5],app_td[4::5])
         return [(x[1],x[2],x[3],x[4]) for x in apps]
 
+    def searchCompany(self,name):
+        self.br.follow_link(text="DVR-Recherche")
+        # search for dvr
+        self.br.select_form(nr=0)
+        self.br.form['ctl00$ContentHolder$DVRRechercheSuche$txtAGBezeichnung$txtAGBezeichnung_TextBox'] = name
+        response = self.br.submit()
+        # parse response
+        soup = BeautifulSoup(response.read())
+        comp_table = soup.find(id="ContentHolder_DVRRechercheResult_GridSuchErgebnis")
+        comp_td = [x.contents[0] for x in comp_table.find_all('td')]
+        comp = zip(comp_td[0::5],comp_td[1::5],comp_td[2::5],comp_td[3::5],comp_td[4::5])
+        return [(x[1],x[2],x[3],x[4]) for x in comp]
+
+
 if __name__ == "__main__":
     d = DVR()
-    print d.applications(sys.argv[1])
+    print d.searchCompany("car2go")
