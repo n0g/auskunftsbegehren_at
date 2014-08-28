@@ -14,15 +14,26 @@ from reportlab.lib.units import cm,mm
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 
-from auskunft.forms import AuskunftForm
+from auskunft.forms import AddressForm, additional_info_form_factory
 
 from auskunft.models import Auftraggeber, Application
 
 
-# Create your views here.
-def index(request):
-    form = AuskunftForm()
-    return render(request,'auskunft/form.html',{'form':form})
+def address(request):
+    form = AddressForm()
+    return render(request,'auskunft/address.html',{'form':form})
+
+def addinfo(request):
+    form = AddressForm(request.POST)
+    if not form.is_valid():
+        raise Http404
+    auftraggeber = form.cleaned_data['auftraggeber']
+    AdditionalInfoForm = additional_info_form_factory(auftraggeber)
+    new_form = AdditionalInfoForm()
+    return render(request,'auskunft/addinfo.html',{'form':new_form})
+
+def delivery(request):
+    return HttpResponse("Nett.")
 
 def create(request):
     form = AuskunftForm(request.POST)
@@ -51,6 +62,8 @@ def create(request):
         return response
     else:
         raise Http404
+
+# TODO: refactor file and move pdf generation to separate file
 
 def create_content(form):
     # TODO: move styles somewhere else

@@ -17,7 +17,7 @@
 <body>
 
 {% load url from future %}
-<form action="{% url 'auskunft:create' %}" method="post">
+<form action="{% url 'auskunft:addinfo' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" />
