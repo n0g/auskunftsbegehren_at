@@ -13,9 +13,9 @@ class InformationRequestWizard(CookieWizardView):
             step = self.steps.current
 
         # set queryset for applications
-        if step == '1':
+        if step == '2':
             auftragg = self.get_cleaned_data_for_step('0')['auftraggeber']
-            apps = Application.objects.filter(auftraggeber=auftragg,state__contains="Registriert")
+            apps = Application.objects.filter(auftraggeber=auftragg,state__contains="Registriert").distinct()
             form.fields['relevant_apps'].queryset = apps
 
         return form
@@ -27,7 +27,9 @@ class InformationRequestWizard(CookieWizardView):
         ir = InformationRequest()
         ir.set_sender(data['name'],data['address'],data['email'])
         ir.set_auftraggeber(data['auftraggeber'])
-        ir.set_relevant_apps(data['relevant_apps'])
-        ir.set_add_info(data['additional_info'])
+        if data['relevant_apps']:
+            ir.set_relevant_apps(data['relevant_apps'])
+        if data['additional_info']:
+            ir.set_add_info(data['additional_info'])
         # return result page
         return ir.pdf_response()

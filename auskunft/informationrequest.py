@@ -21,19 +21,19 @@ class InformationRequest():
         self.sender_name = ""
         self.sender_address = [ "" ]
         self.recipient_address = [ "" ]
-        self.add_info = ""
-        self.table_apps = Table([[""]],colWidths=[3*cm,14*cm])
+        self.add_info = None
+        self.table_apps = None
 
     def set_sender(self,name,address,email):
         self.sender_name = name
-        self.sender_address = [ name ] + \
-            address.splitlines() + \
-            [ "E-Mail: " + email ]
+        self.sender_address = [ name ] + address.splitlines()
+        if email:
+            self.sender_address += [ "E-Mail: " + email ]
 
     def set_auftraggeber(self,auftraggeber):
-        self.recipient_address = [ auftraggeber.name ] + \
-            auftraggeber.address.splitlines() + \
-            [ "E-Mail: " + auftraggeber.email]
+        self.recipient_address = [ auftraggeber.name ] + auftraggeber.address.splitlines()
+        if auftraggeber.email:
+            self.recipient_address += [ "E-Mail: " + auftraggeber.email ]
 
     def set_add_info(self,add_info):
         self.add_info = add_info
@@ -105,21 +105,32 @@ class InformationRequest():
             Paragraph(_("auskunft_par_4"), styles['Message']),
             Paragraph(_("auskunft_par_12"), styles['Message']),
 
-            Paragraph(_("auskunft_standard_application"), styles['Message']),
-            Paragraph(_("auskunft_registered_application_pre"),styles['Message']),
-            self.table_apps,
-            Paragraph(_("auskunft_registered_application_post"),styles['Message']),
+            Paragraph(_("auskunft_standard_application"), styles['Message'])
+        ]
 
+        # Registered Applications
+        if self.table_apps:
+            content += [
+                Paragraph(_("auskunft_registered_application_pre"),styles['Message']),
+                self.table_apps,
+                Paragraph(_("auskunft_registered_application_post"),styles['Message'])
+            ]
 
-            Paragraph(_("auskunft_additional_info_text"), styles['Message']),
-            Paragraph(self.add_info,ibs),
+        # Additional Information
+        if self.add_info:
+            content += [
+                Paragraph(_("auskunft_additional_info_text"), styles['Message']),
+                Paragraph(self.add_info,ibs)
+            ]
 
+        content += [
             Paragraph(_("auskunft_method_identity"),styles['Message']),
             Paragraph(_("auskunft_expected_response"),styles['Message']),
 
             Spacer(0,0.5*cm),
             Paragraph(_("auskunft_signature"),styles['Signature']),
-            Paragraph(self.sender_name,styles['Signature']),
+            Spacer(0,1.5*cm),
+            Paragraph(self.sender_name,styles['Signature'])
         ]
 
         return content
