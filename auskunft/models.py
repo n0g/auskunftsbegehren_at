@@ -19,7 +19,7 @@ class Application(models.Model):
     state = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.number
+        return self.number + " " + self.description
 
 class Category(models.Model):
     name = models.CharField(max_length=100)

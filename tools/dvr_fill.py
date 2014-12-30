@@ -1,8 +1,10 @@
+import django
 from auskunft.dvr import DVR
 from auskunft.models import Auftraggeber, Category, Membership, Application
 import datetime
 
 d = DVR()
+django.setup()
 
 for ag in Auftraggeber.objects.all():
     new_dvr = "{0:07d}".format(ag.dvr)

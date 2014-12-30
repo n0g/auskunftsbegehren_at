@@ -7,12 +7,6 @@ class AddressForm(forms.Form):
     email = forms.EmailField()
     auftraggeber = forms.ModelChoiceField(queryset=Auftraggeber.objects.all())
 
-def additional_info_form_factory(auftraggeber):
-    properties = {
-            'additional_info': forms.CharField(widget=forms.Textarea),
-            'relevant_apps': forms.ModelChoiceField(
-                widget=forms.CheckboxSelectMultiple,
-                queryset=Application.objects.filter(auftraggeber=auftraggeber,state__contains="Registriert"))
-        }
-
-    return type('AdditionalInfoForm',(forms.Form,),properties)
+class AdditionalInfoForm(forms.Form):
+    additional_info = forms.CharField(widget=forms.Textarea)
+    relevant_apps = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Application.objects.none())
