@@ -60,6 +60,8 @@ class DVR:
         # search for dvr
         self.br.select_form(nr=0)
         self.br.form['ctl00$ContentHolder$DVRRechercheSuche$txtAGBezeichnung$txtAGBezeichnung_TextBox'] = name
+        # TODO: select "all"
+        self.br.form['ctl00$ContentHolder$DVRRechercheSuche$AnzahlErgebnisseTemplate$ChkBxListAnzahlProSeite'] = ["1000"]
         response = self.br.submit()
         # parse response
         soup = BeautifulSoup(response.read())
