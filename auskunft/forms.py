@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from auskunft.models import Auftraggeber, Application, IdentityProof
+from auskunft.models import Auftraggeber, Application
 
 class AuftraggeberForm(forms.Form):
     auftraggeber = \
@@ -24,6 +24,9 @@ class AdditionalInfoForm(forms.Form):
     label='Zusaetzliche Informationen (im Rahmen der Mitwirkungspflicht)')
 
 class ProofOfIdentityForm(forms.Form):
-    identity = forms.ModelChoiceField(queryset=IdentityProof.objects.all(), \
-    widget=forms.Select, label='Form des \
-    Identitaetsnachweises', required=False)
+    IDENTITY_CHOICES = (
+        ('AUSWEIS', 'Kopie eines amtlichen Lichtbildausweises'),
+        ('MELDEZE', 'Kopie eines aktuellen Meldezettels'),
+    )
+    identity = forms.ChoiceField(choices=IDENTITY_CHOICES,label='Form \
+des Identitaetsnachweises')

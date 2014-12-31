@@ -23,10 +23,13 @@ class InformationRequestWizard(CookieWizardView):
     def done(self, form_list, **kwargs):
         # parse content of form list
         data = self.get_all_cleaned_data()
+        print data
         # call create method
         ir = InformationRequest()
         ir.set_sender(data['name'],data['address'],data['email'])
         ir.set_auftraggeber(data['auftraggeber'])
+        # TODO: Identitaetsnachweis abfragen
+        # data['identity']
         if data['relevant_apps']:
             ir.set_relevant_apps(data['relevant_apps'])
         if data['additional_info']:

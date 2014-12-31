@@ -32,13 +32,3 @@ class Category(models.Model):
 class Membership(models.Model):
     auftraggeber = models.ForeignKey(Auftraggeber)
     category = models.ForeignKey(Category)
-
-class IdentityProof(models.Model):
-    IDENTITY_CHOICES = (
-        ('AUSWEIS', 'Kopie eines amtlichen Lichtbildausweises'),
-        ('MELDEZETTEL', 'Kopie eines aktuellen Meldezettels'),
-    )
-
-    identity_proof = models.CharField(max_length=100, \
-        choices=IDENTITY_CHOICES, default='AUSWEIS')
-
