@@ -17,13 +17,13 @@ class AdditionalInfoForm(forms.Form):
     relevant_apps = \
     forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, \
     queryset=Application.objects.none(), required=False, \
-    label='Relevante Datenanwendungen in denen sich Daten über mich\
-    befinden könnten (im Rahmen der Mitwirkungspflicht)')
+    label='Relevante Datenanwendungen in denen sich Daten ueber mich\
+    befinden koennten (im Rahmen der Mitwirkungspflicht)')
     additional_info = \
     forms.CharField(widget=forms.Textarea,required=False, \
-    label='ZusÃ¤zliche Informationen (im Rahmen der Mitwirkungspflicht)')
+    label='Zusaetzliche Informationen (im Rahmen der Mitwirkungspflicht)')
 
 class ProofOfIdentityForm(forms.Form):
     identity = forms.ModelChoiceField(queryset=IdentityProof.objects.all(), \
     widget=forms.Select, label='Form des \
-    Identitätsnachweises', required=False)
+    Identitaetsnachweises', required=False)
