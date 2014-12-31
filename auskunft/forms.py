@@ -1,14 +1,29 @@
+# -*- coding: utf-8 -*-
+
 from django import forms
-from auskunft.models import Auftraggeber, Application
+from auskunft.models import Auftraggeber, Application, IdentityProof
 
 class AuftraggeberForm(forms.Form):
-    auftraggeber = forms.ModelChoiceField(queryset=Auftraggeber.objects.all())
+    auftraggeber = \
+    forms.ModelChoiceField(queryset=Auftraggeber.objects.all(), \
+    label='Auftraggeber')
 
 class AddressForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    address = forms.CharField(widget=forms.Textarea)
-    email = forms.EmailField()
+    name = forms.CharField(max_length=100, label='Voller Name')
+    address = forms.CharField(widget=forms.Textarea, label='Adresse')
+    email = forms.EmailField(label='E-Mail Adresse')
 
 class AdditionalInfoForm(forms.Form):
-    additional_info = forms.CharField(widget=forms.Textarea,required=False)
-    relevant_apps = forms.ModelMultipleChoiceField(required=False,widget=forms.CheckboxSelectMultiple,queryset=Application.objects.none())
+    relevant_apps = \
+    forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, \
+    queryset=Application.objects.none(), required=False, \
+    label='Relevante Datenanwendungen in denen sich Daten über mich\
+    befinden könnten (im Rahmen der Mitwirkungspflicht)')
+    additional_info = \
+    forms.CharField(widget=forms.Textarea,required=False, \
+    label='ZusÃ¤zliche Informationen (im Rahmen der Mitwirkungspflicht)')
+
+class ProofOfIdentityForm(forms.Form):
+    identity = forms.ModelChoiceField(queryset=IdentityProof.objects.all(), \
+    widget=forms.Select, label='Form des \
+    Identitätsnachweises', required=False)
